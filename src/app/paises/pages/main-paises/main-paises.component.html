@@ -1,0 +1,64 @@
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+
+  <div *ngIf="showSpinner" class="my-4 container d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Continente:</label>
+      <select formControlName="continente" class="form-control">
+        <option [value]="''">--Seleccione Continente--</option>
+        <option *ngFor="let region of regiones;" [value]="region | lowercase">{{region}}</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="row mb-3" *ngIf="countries.length">
+    <div class="col">
+      <label class="form-label">Paises:</label>
+      <select formControlName="pais"  class="form-control">
+        <option [value]="''">--Seleccione Pais--</option>
+        <option *ngFor="let country of countries;" [value]="country.cca3 | lowercase">
+          {{country.name.common}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="row mb-3" *ngIf="borders.length">
+    <div class="col">
+      <label class="form-label">Fronteras:</label>
+      <select formControlName="frontera"  class="form-control">
+        <option [value]="''">--Seleccione Frontera--</option>
+        <option *ngFor="let border of borders;" [value]="border | lowercase">
+          {{border}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
+      <button class="btn btn-primary float-end" type="submit">Guardar</button>
+    </div>
+  </div>
+</form>
+
+<h3 class="mt-5">Valores</h3>
+<hr>
+
+<h5>Valid</h5>
+<pre>{{form.valid | json}}</pre>
+
+<hr>
+
+<h5>Valor</h5>
+<pre>{{form.value | json}}</pre>
+
+
+<pre *ngFor="let country of countries">{{country | json}}</pre>
